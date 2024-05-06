@@ -1,1 +1,44 @@
+# https://www.autohotkey.com/download/
+# pip install "ahk[binary]"
+import time
 
+import pyautogui
+import keyboard
+
+from ahk import AHK
+
+ahk = AHK()
+text = 'Привет мир'
+
+#ahk.mouse_move(x=100, y=100, speed=1, blocking=True) # двигает мышку по координатам blocking - не выполнит следующий код, пока не закончит эту
+
+for window in ahk.windows():
+    print(window.title)  # выводит открытые окна в пк
+
+#while not keyboard.is_pressed('esc'): # пока не нажата клавиша esc, программа будет работать
+
+#ahk.type(text)
+
+# pyautogui.press('right') просто нажимает клавишу вправо
+
+windows_search = ahk.find_window(title='Яндекс Браузер') # находит окно с текстом (title) Banana
+
+if windows_search:
+    pyautogui.sleep(0.5)
+
+    windows_search.activate() # выводит окно на передний план (то есть открывает)
+    pyautogui.moveTo(1636, 16, 1.5)
+    pyautogui.click()
+    pyautogui.moveTo(978, 411, 1.1)
+    pyautogui.click()
+
+    for char in text: # пишет по буквам
+        ahk.type(char)
+        time.sleep(0.5) # задержка при написании
+
+    pyautogui.press('enter') # нажимает enter
+
+    pyautogui.moveTo(228, 158, 1.1)
+    pyautogui.click()
+
+    #windows_search.minimize() # сворачивает окно
